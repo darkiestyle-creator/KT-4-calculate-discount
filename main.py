@@ -5,23 +5,21 @@ print(
 """
 )
 
-price_input = input("Введите цену: ")
+def good_price():
+  while True:
+    price_input = input("Введите цену: ")
 
-while not price_input.isdigit():
-  print("Ошибка: нужно ввести только цифры")
-  price_input = input("Введите цену: ")
+    if not price_input.isdigit():
+      print("Ошибка: нужно ввести только цифры")
+      continue
 
-price = int(price_input)
+    return int(price_input)
+
+price = good_price()
 
 while price <= 0:
   print("Цена должна быть больше нуля. Попробуйте еще раз")
-  price_input = input("Введите цену курса в рублях: ")
-
-  while not price_input.isdigit():
-    print("Ошибка: нужно ввести только цифры")
-    price_input = input("Введите цену курса в рублях: ")
-
-  price = int(price_input)
+  price = good_price()
 
 def calculate(price, system):
   if system == "fix":
@@ -37,6 +35,8 @@ def calculate(price, system):
     if discount > 4000:
       discount = 4000
     return price - discount
+  else:
+    return price
 
 print(
     f"""
